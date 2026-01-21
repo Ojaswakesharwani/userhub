@@ -1,4 +1,4 @@
-package com.example.userhub;
+package com.example.userhub.model;
 
 public class User {
 
@@ -6,6 +6,9 @@ public class User {
     private String name;
     private String email;
     private String username;
+    private String phone;
+
+    private Address address;
 
     public String getName() {
         return name;
@@ -17,5 +20,13 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 }

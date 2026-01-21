@@ -3,6 +3,8 @@ package com.example.userhub;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.userhub.model.User;
+
 import java.util.List;
 
 import retrofit2.Call;

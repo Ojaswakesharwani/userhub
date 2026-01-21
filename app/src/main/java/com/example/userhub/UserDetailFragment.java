@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 
 public class UserDetailFragment extends Fragment {
-    TextView name, email, username;
+    TextView name, email, username , phone;
+    TextView street, suite, city, zipcode, lat, lon;
 
 
     @Override
@@ -28,6 +29,13 @@ public class UserDetailFragment extends Fragment {
         name = view.findViewById(R.id.nameText);
         email = view.findViewById(R.id.emailText);
         username = view.findViewById(R.id.usernameText);
+        phone = view.findViewById(R.id.phone);
+
+        street = view.findViewById(R.id.street);
+        suite = view.findViewById(R.id.suit);
+        city = view.findViewById(R.id.city);
+        zipcode = view.findViewById(R.id.zipcode);
+
 
         SharedUserViewModel sharedViewModel =
                 new ViewModelProvider(requireActivity())
@@ -38,6 +46,15 @@ public class UserDetailFragment extends Fragment {
             name.setText("Name : "+user.getName());
             email.setText("Email : "+user.getEmail());
             username.setText("Username : "+user.getUsername());
+            phone.setText("Phone : "+user.getPhone());
+
+            street.setText("Street : "+user.getAddress().getStreet());
+            suite.setText("Suite : "+user.getAddress().getSuite());
+            city.setText("City : "+user.getAddress().getCity());
+            zipcode.setText("Zipcode : "+user.getAddress().getZipcode());
+
+
+
         });
     }
 }

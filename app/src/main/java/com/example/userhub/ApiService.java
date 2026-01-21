@@ -1,5 +1,7 @@
 package com.example.userhub;
 
+import com.example.userhub.model.User;
+
 import java.util.List;
 
 import retrofit2.Call;

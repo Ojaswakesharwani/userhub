@@ -12,10 +12,13 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private List<User> userList;
+    private OnUserClickListener listener;
 
-    public UserAdapter(List<User> list) {
+    public UserAdapter(List<User> list, OnUserClickListener listener) {
         this.userList = list;
+        this.listener = listener;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,11 +31,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        User user = userList.get(position);
 
-        holder.name.setText(userList.get(position).getName());
-        holder.email.setText("Email : "+userList.get(position).getEmail());
-        holder.username.setText("Username : "+userList.get(position).getUsername());
-    }
+        holder.name.setText(user.getName());
+        holder.email.setText("Email : "+user.getEmail());
+        holder.username.setText("Username : "+user.getUsername());
+
+        holder.itemView.setOnClickListener(v -> {
+            listener.onUserClick(user);
+        });    }
 
     @Override
     public int getItemCount() {

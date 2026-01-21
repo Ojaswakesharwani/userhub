@@ -1,10 +1,14 @@
 package com.example.userhub;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +16,8 @@ import android.widget.TextView;
 
 
 public class UserDetailFragment extends Fragment {
-    TextView name, email, username , phone;
-    TextView street, suite, city, zipcode, lat, lon;
+    TextView name, email, username, phone;
+    TextView street, suite, city, zipcode, previewLink;
 
 
     @Override
@@ -36,6 +40,8 @@ public class UserDetailFragment extends Fragment {
         city = view.findViewById(R.id.city);
         zipcode = view.findViewById(R.id.zipcode);
 
+        previewLink = view.findViewById(R.id.previewlink);
+
 
         SharedUserViewModel sharedViewModel =
                 new ViewModelProvider(requireActivity())
@@ -43,16 +49,30 @@ public class UserDetailFragment extends Fragment {
 
         sharedViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
 
-            name.setText("Name : "+user.getName());
-            email.setText("Email : "+user.getEmail());
-            username.setText("Username : "+user.getUsername());
-            phone.setText("Phone : "+user.getPhone());
+            name.setText("Name : " + user.getName());
+            email.setText("Email : " + user.getEmail());
+            username.setText("Username : " + user.getUsername());
+            phone.setText("Phone : " + user.getPhone());
 
-            street.setText("Street : "+user.getAddress().getStreet());
-            suite.setText("Suite : "+user.getAddress().getSuite());
-            city.setText("City : "+user.getAddress().getCity());
-            zipcode.setText("Zipcode : "+user.getAddress().getZipcode());
+            street.setText("Street : " + user.getAddress().getStreet());
+            suite.setText("Suite : " + user.getAddress().getSuite());
+            city.setText("City : " + user.getAddress().getCity());
+            zipcode.setText("Zipcode : " + user.getAddress().getZipcode());
 
+            // LAT LONG
+            String lat = user.getAddress().getGeo().getLat();
+            String lng = user.getAddress().getGeo().getLng();
+
+            previewLink.setOnClickListener(v -> {
+
+                String mapUrl = "https://www.google.com/maps/search/?api=1&query="
+                        + lat + "," + lng;
+
+                Log.e("Preview", "Map URL = " + mapUrl);
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl));
+                startActivity(browserIntent);
+            });
 
 
         });

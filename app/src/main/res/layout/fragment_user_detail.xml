@@ -117,6 +117,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/previewlink"
+                android:text="View location"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textColor="@color/preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
